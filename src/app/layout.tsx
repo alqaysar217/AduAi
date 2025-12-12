@@ -1,19 +1,18 @@
-
 import type { Metadata } from "next";
-import { Roboto, Tajawal } from "next/font/google"; // Import Tajawal
+import { Roboto, Tajawal } from "next/font/google"; 
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import { Toaster } from "@/components/ui/toaster";
 import ThemeInitializer from "@/components/theme-initializer";
-import LanguageProvider from "@/providers/LanguageProvider"; // Import LanguageProvider
+import LanguageProvider from "@/providers/LanguageProvider";
 
 const roboto = Roboto({
   weight: ["400", "700"],
-  subsets: ["latin", "arabic"], // Add Arabic subset if needed for Roboto
+  subsets: ["latin"], // ⬅️ تم حذف "arabic" من هنا
   variable: "--font-roboto",
 });
 
-const tajawal = Tajawal({ // Define Tajawal font
+const tajawal = Tajawal({ 
   weight: ["400", "700"],
   subsets: ["arabic"],
   variable: "--font-tajawal",
@@ -30,16 +29,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    // LanguageProvider will set lang and dir on <html>
-    // ThemeInitializer handles initial theme before hydration
-    // No whitespace between <html...> and <head>
     <LanguageProvider>
+      {/* تأكد من أن LanguageProvider أو إعدادات CSS لديك تستخدم Tajawal كخط أساسي عند الحاجة للعربية */}
       <html lang="en" suppressHydrationWarning><head><ThemeInitializer /></head>
         <body
           className={cn(
             "min-h-screen bg-background text-foreground font-body antialiased",
-            roboto.variable, // Make Roboto variable available
-            tajawal.variable  // Make Tajawal variable available
+            roboto.variable,
+            tajawal.variable 
           )}
         >
           {children}
